@@ -23,7 +23,6 @@ public class Main {
 
                 Matcher matcher = instruction.matcher(line);
                 while(matcher.find()) {
-                    System.out.println(matcher.group(0));
                     nums.add(Integer.parseInt(matcher.group(1)));
                     nums.add(Integer.parseInt(matcher.group(2)));
                 }
@@ -38,7 +37,7 @@ public class Main {
 
     public static int completeCalculations(int[] nums) {
         int total = 0;
-        for(int i = 1; i < nums.length; i++) {
+        for(int i = 1; i < nums.length; i += 2) {
             total += mul(nums[i-1], nums[i]);
         }
 

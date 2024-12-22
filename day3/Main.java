@@ -1,8 +1,7 @@
-package day3;
-import java.util.*;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,15 +15,24 @@ public class Main {
         ArrayList<Integer> nums = new ArrayList<>();
 
         try(Scanner readFile = new Scanner(input)) {
+
+            Pattern instruction = Pattern.compile("mul[(](-?\\d{1,3}),(-?\\d{1,3})[)]", Pattern.CASE_INSENSITIVE);
+
+            // Pattern enable = Pattern.compile("do[(][)]", Pattern.CASE_INSENSITIVE);
+            // Pattern disable = Pattern.compile("don't[(][)]", Pattern.
+            // CASE_INSENSITIVE);
+
             while(readFile.hasNextLine()) {
                 String line = readFile.nextLine();
-
-                Pattern instruction = Pattern.compile("mul[(](-?\\d{1,3}),(-?\\d{1,3})[)]", Pattern.CASE_INSENSITIVE);
-
                 Matcher matcher = instruction.matcher(line);
+                // Matcher findEnable = enable.matcher(line);
+                // Matcher findDisable = disable.matcher(line);
+                // boolean isEnabled = true;
+
+                // Answer to part 1
                 while(matcher.find()) {
-                    nums.add(Integer.parseInt(matcher.group(1)));
-                    nums.add(Integer.parseInt(matcher.group(2)));
+                    nums.add(Integer.valueOf(matcher.group(1)));
+                    nums.add(Integer.valueOf(matcher.group(2)));
                 }
             }
             readFile.close();
@@ -40,7 +48,6 @@ public class Main {
         for(int i = 1; i < nums.length; i += 2) {
             total += mul(nums[i-1], nums[i]);
         }
-
         return total;
     }
 
